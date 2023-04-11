@@ -1,54 +1,50 @@
 //required files and directories
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
 const uuid = require('./helpers/uuid');
 
 const app = express();
-//server port
+// this is the default server evnironment configuration
 const PORT = process.env.PORT || 3001;
 
-app.use(express.urlencoded({ extended: true }));
+// this is the middleware for parsing any JSON and urlencoded form data
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// this is the middleware for serving any static files
 app.use(express.static('public'));
 
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.html'));
-});
-
+// this is a GET route for the notes page
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
 
-
-
-
+//this will GET a route for all notes
 app.get('/api/notes', (req, res) => {
     const notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
     res.json(notes);
 });
 
-// posting notes
+//this will POST a route for a new note
 app.post('/api/notes', (req, res) => {
+    const newNote = {
+        id: uuid(),
+        title: req.body.title,
+        text: req.body.text
+    };
     const notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
-    const newNote = req.body;
-    newNote.uuid = notes.length.toString();
     notes.push(newNote);
     fs.writeFileSync('./db/db.json', JSON.stringify(notes));
-    res.json(notes);
+    res.json(newNote);
 });
 
-// deleting notes with an id
-app.delete('/api/notes/:id', (req, res) => {
-    const notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
-    const updatedNotes = notes.filter(note => note.uuid !== req.params.id);
-    fs.writeFileSync('./db/db.json', JSON.stringify(updatedNotes));
-    res.json(updatedNotes);
+//this gets the route for index page
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-
-
+//this runs the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
