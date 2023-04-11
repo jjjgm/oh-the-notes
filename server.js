@@ -2,6 +2,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const uuid = require('./helpers/uuid');
 
 const app = express();
 //server port
@@ -32,7 +33,7 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
     const notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
     const newNote = req.body;
-    newNote.id = notes.length.toString();
+    newNote.uuid = notes.length.toString();
     notes.push(newNote);
     fs.writeFileSync('./db/db.json', JSON.stringify(notes));
     res.json(notes);
@@ -41,7 +42,7 @@ app.post('/api/notes', (req, res) => {
 // deleting notes with an id
 app.delete('/api/notes/:id', (req, res) => {
     const notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
-    const updatedNotes = notes.filter(note => note.id !== req.params.id);
+    const updatedNotes = notes.filter(note => note.uuid !== req.params.id);
     fs.writeFileSync('./db/db.json', JSON.stringify(updatedNotes));
     res.json(updatedNotes);
 });
