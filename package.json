@@ -4,16 +4,13 @@
   "description": "This creates an application named \"Note Taker\" that can be used to write and save notes- using Express.js back end and saves and retrieves the note data from a JSON file.",
   "main": "server.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.22"
   },
   "keywords": []
 }
