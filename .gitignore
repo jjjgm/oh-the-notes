@@ -104,5 +104,4 @@ dist
 .tern-port
 .DS_Store
 node_modules
-helpers
 # remember to delete helpers from here later on
