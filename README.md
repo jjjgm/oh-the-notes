@@ -20,15 +20,6 @@ This creates an application named "Note Taker" that can be used to write and sav
         THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column
 
 
-## Table of Contents
-
-[Installation]
-[Usage]
-[Deployment]
-[License]
-[Credits & Refrences]
-[Assets]
-
 
 ## Installation
 1. [Starter Code Repository](https://github.com/coding-boot-camp/miniature-eureka)
@@ -36,20 +27,20 @@ This creates an application named "Note Taker" that can be used to write and sav
 3. node_modules
 4. gitignore- (added node_modules & .DS_Store)
 <!-- 5. Heroku -->
+<!-- jjjgm-oh-the-notes-pr-123.herokuapp.com -->
 
 
 ## Usage
-
+Create task notes with express Js
 
 ## Deployment
 [Heroku Server Deployment]()
 
-[GitHub Repository- code files only]()
+[GitHub Repository- code files only](https://github.com/jjjgm/oh-the-notes)
 
 ## License
 
 MIT License
 
-## Credits & Refrences
 
-## Assets
+
